@@ -137,3 +137,11 @@ fi
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+
+vscd() {
+  local dir
+  dir=$(fd --type d --hidden --exclude .git . "${1:-.}" | fzf --preview 'tree -C {} | head -100' --preview-window=right:60%) || return
+  code "$dir"
+}
+

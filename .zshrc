@@ -1,3 +1,4 @@
+
 # Enable Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -31,24 +32,7 @@ zstyle ':completion:*' special-dirs true
 # Aliases
 alias cat='bat --style=plain --paging=never'
 alias ls='exa --icons --group-directories-first'
-alias ll='exa -la --icons --group-directories-first'
-alias grep='rg'
-alias du='dust'
-alias df='duf'
-alias top='btop'
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias ~='cd ~'
-alias dev='cd ~/Development'
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gp='git push'
-alias gl='git pull'
-alias gd='git diff'
-alias glo='git log --oneline --graph'
-alias cls='clear'
+
 alias reload='source ~/.zshrc'
 alias zshconfig='${EDITOR:-nano} ~/.zshrc'
 alias update='sudo apt update && sudo apt upgrade -y'
@@ -57,3 +41,27 @@ alias update='sudo apt update && sudo apt upgrade -y'
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 export PATH=$PATH:/home/sukuna/.spicetify
+
+
+vscd() {
+  local dir
+  dir=$(fd --type d --hidden --exclude .git . "${1:-.}" | fzf --preview 'tree -C {} | head -100' --preview-window=right:60%) || return
+  code "$dir"
+}
+
+
+
+
+# pnpm
+export PNPM_HOME="/home/sukuna/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/home/sukuna/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/sukuna/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
