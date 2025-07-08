@@ -90,7 +90,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias mkdir='mkdir -pv'
 alias diff='diff --color=auto'
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias alert='notify-send -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ┌──────────────────────────────────────────┐
 # │           DEVELOPMENT TOOLS              │
@@ -145,3 +145,7 @@ vscd() {
   code "$dir"
 }
 
+export ANDROID_HOME=$HOME/Android
+export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH
+export PATH=$PATH:~/.local/bin
+export PATH=$PATH:~/.local/bin
